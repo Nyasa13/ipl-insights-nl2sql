@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    COALESCE(SUM(total_runs), 0) AS total_runs_scored\nFROM\n    ball_facts\nWHERE\n    season = 2008\n    AND batting_team = 'Rajasthan Royals';\n```"}

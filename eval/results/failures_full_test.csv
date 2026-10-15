@@ -1,0 +1,9 @@
+id,difficulty,question,gold_sql,generated_sql,error,auto_hint,category,notes
+M06,medium,What is the average first-innings score at M Chinnaswamy Stadium?,"SELECT ROUND(AVG(t), 2) FROM (SELECT match_id, SUM(total_runs) AS t FROM ball_facts WHERE inning = 1 AND venue ILIKE '%Chinnaswamy%' GROUP BY match_id) x","SELECT ROUND(AVG(first_innings_total), 2) AS avg_first_innings_score
+FROM (
+    SELECT match_id, SUM(total_runs) AS first_innings_total
+    FROM ball_facts
+    WHERE inning = 1
+      AND venue ILIKE '%M Chinnaswamy Stadium%'
+    GROUP BY match_id
+) AS t;",,,,

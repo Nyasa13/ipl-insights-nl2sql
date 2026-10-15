@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS match_count\nFROM matches\nWHERE venue ILIKE '%Wankhede Stadium%';\n```"}

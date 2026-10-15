@@ -1,0 +1,47 @@
+# docker compose up -d db
+# docker compose --profile init run --rm loader        # one-off: clean + load data, create read-only role
+# docker compose up -d api ui                          # UI on http://localhost:8501, API docs on :8000/docs
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ipl
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ipl"]
+      interval: 3s
+      retries: 20
+
+  loader:
+    build: .
+    profiles: ["init"]
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      DATABASE_URL_ADMIN: postgresql+psycopg2://postgres:postgres@db:5432/ipl
+      READONLY_PASSWORD: ${READONLY_PASSWORD:-change-me}
+    volumes: ["./data:/srv/data"]
+    # real data:      python -m db.load_data --matches data/raw/matches.csv --deliveries data/raw/deliveries.csv
+    # fake test data: python -m db.load_data --synthetic
+    command: python -m db.load_data --matches data/raw/matches.csv --deliveries data/raw/deliveries.csv
+
+  api:
+    build: .
+    depends_on: { db: { condition: service_healthy } }
+    env_file: .env
+    environment:
+      DATABASE_URL_RO: postgresql+psycopg2://ipl_readonly:${READONLY_PASSWORD:-change-me}@db:5432/ipl
+    ports: ["8000:8000"]
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+  ui:
+    build: .
+    depends_on: [api]
+    environment:
+      API_URL: http://api:8000
+    ports: ["8501:8501"]
+    command: streamlit run ui/streamlit_app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
+
+volumes:
+  pgdata:

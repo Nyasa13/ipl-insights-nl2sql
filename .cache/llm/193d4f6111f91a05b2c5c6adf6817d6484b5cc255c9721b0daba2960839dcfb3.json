@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT ROUND(100.0 * SUM(runs) / NULLIF(SUM(balls_faced), 0), 2) AS strike_rate_2016\nFROM player_match_batting\nWHERE season = 2016\n  AND batter = 'V Kohli';\n```"}

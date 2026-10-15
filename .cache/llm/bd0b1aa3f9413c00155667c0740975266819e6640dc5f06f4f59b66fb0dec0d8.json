@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    player_of_match AS player,\n    COUNT(*) AS pom_awards\nFROM matches\nWHERE player_of_match IS NOT NULL\nGROUP BY player_of_match\nORDER BY pom_awards DESC\nLIMIT 1;\n```"}

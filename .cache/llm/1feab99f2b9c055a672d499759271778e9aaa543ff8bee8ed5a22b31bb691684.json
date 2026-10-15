@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT winner, COUNT(*) AS wins\nFROM matches\nWHERE season = 2016\n  AND winner IS NOT NULL\nGROUP BY winner\nORDER BY wins DESC\nLIMIT 1;\n```"}

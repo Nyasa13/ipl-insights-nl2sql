@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT d.bowler AS player,\n       COUNT(*)   AS wickets\nFROM   deliveries d\nJOIN   matches m USING (match_id)\nWHERE  m.season = 2019\n  AND  d.is_wicket = 1\nGROUP  BY d.bowler\nORDER  BY wickets DESC\nLIMIT  1;\n```"}

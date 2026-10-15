@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    season,\n    winner AS team,\n    win_count AS wins\nFROM (\n    SELECT\n        season,\n        winner,\n        COUNT(*) AS win_count\n    FROM matches\n    WHERE winner IS NOT NULL\n    GROUP BY season, winner\n) AS season_wins\nDISTINCT ON (season)\nORDER BY season, win_count DESC, winner;\n```"}

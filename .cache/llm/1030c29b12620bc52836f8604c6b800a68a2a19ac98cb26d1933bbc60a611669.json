@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT batter,\n       runs AS highest_score\nFROM   player_match_batting\nORDER BY runs DESC\nLIMIT 1;\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT batter\nFROM batting_by_season\nWHERE runs >= 500\nGROUP BY batter\nHAVING COUNT(*) >= 3\nORDER BY batter;\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS chasing_wins\nFROM matches\nWHERE season = 2021\n  AND result = 'wickets';\n```"}

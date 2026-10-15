@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT ROUND(AVG(first_innings_total), 2) AS avg_first_innings_score\nFROM (\n    SELECT match_id, SUM(total_runs) AS first_innings_total\n    FROM ball_facts\n    WHERE inning = 1\n      AND venue ILIKE '%M Chinnaswamy Stadium%'\n    GROUP BY match_id\n) AS t;\n```"}

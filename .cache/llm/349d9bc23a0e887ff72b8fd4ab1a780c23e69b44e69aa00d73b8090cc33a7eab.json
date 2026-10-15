@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    bowler,\n    SUM(wickets) AS total_wickets\nFROM\n    player_match_bowling\nWHERE\n    season = 2019\nGROUP BY\n    bowler\nORDER BY\n    total_wickets DESC\nLIMIT 1;\n```"}

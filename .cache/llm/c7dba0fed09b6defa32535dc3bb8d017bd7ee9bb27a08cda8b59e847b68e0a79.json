@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    bowler,\n    SUM(is_bowler_wicket) AS total_wickets,\n    SUM(is_legal_delivery) AS legal_balls\nFROM ball_facts\nWHERE season = 2022\nGROUP BY bowler\nHAVING SUM(is_legal_delivery) >= 60\nORDER BY total_wickets DESC, legal_balls DESC\nLIMIT 3;\n```"}

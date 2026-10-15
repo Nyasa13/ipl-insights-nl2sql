@@ -1,0 +1,34 @@
+[
+  {
+    "question": "What is the total number of wides bowled in 2015?",
+    "sql": "SELECT COUNT(*) AS wides FROM ball_facts WHERE season = 2015 AND extras_type = 'wides'"
+  },
+  {
+    "question": "Top 3 run scorers for Kolkata Knight Riders in 2014",
+    "sql": "SELECT batter, SUM(batter_runs) AS runs FROM ball_facts WHERE season = 2014 AND batting_team = 'Kolkata Knight Riders' GROUP BY batter ORDER BY runs DESC LIMIT 3"
+  },
+  {
+    "question": "Which bowler has bowled the most dot balls in the powerplay?",
+    "sql": "SELECT bowler, COUNT(*) AS dot_balls FROM ball_facts WHERE phase = 'powerplay' AND is_legal_delivery = 1 AND bowler_runs = 0 GROUP BY bowler ORDER BY dot_balls DESC LIMIT 1"
+  },
+  {
+    "question": "What is the average winning margin in runs for Sunrisers Hyderabad?",
+    "sql": "SELECT ROUND(AVG(result_margin), 2) AS avg_margin_runs FROM matches WHERE winner = 'Sunrisers Hyderabad' AND result = 'runs'"
+  },
+  {
+    "question": "What is the highest team total in a single innings?",
+    "sql": "SELECT batting_team, match_id, SUM(total_runs) AS total FROM ball_facts GROUP BY batting_team, match_id, inning ORDER BY total DESC LIMIT 1"
+  },
+  {
+    "question": "Which batters have scored more than 600 runs in a season?",
+    "sql": "SELECT batter, season, runs FROM batting_by_season WHERE runs > 600 ORDER BY runs DESC"
+  },
+  {
+    "question": "Who has taken the most wickets at Eden Gardens?",
+    "sql": "SELECT bowler, SUM(is_bowler_wicket) AS wickets FROM ball_facts WHERE venue ILIKE '%Eden Gardens%' GROUP BY bowler ORDER BY wickets DESC LIMIT 1"
+  },
+  {
+    "question": "How many sixes did AB de Villiers hit?",
+    "sql": "SELECT COUNT(*) AS sixes FROM ball_facts WHERE batter = 'AB de Villiers' AND batter_runs = 6"
+  }
+]

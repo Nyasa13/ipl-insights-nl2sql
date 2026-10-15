@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    bowler,\n    ROUND(SUM(is_legal_delivery)::numeric / NULLIF(SUM(is_bowler_wicket), 0), 2) AS powerplay_strike_rate\nFROM ball_facts\nWHERE phase = 'powerplay'\nGROUP BY bowler\nHAVING SUM(is_bowler_wicket) >= 30\nORDER BY powerplay_strike_rate ASC\nLIMIT 1;\n```"}

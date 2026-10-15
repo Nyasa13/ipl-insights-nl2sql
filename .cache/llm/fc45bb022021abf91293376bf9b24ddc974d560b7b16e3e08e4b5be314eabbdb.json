@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS rows_to_update\nFROM matches\nWHERE winner IS DISTINCT FROM 'Mumbai Indians';\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nWITH powerplay_stats AS (\n    SELECT\n        bowler,\n        COUNT(*) FILTER (\n            WHERE extras_type IS NULL\n               OR extras_type NOT IN ('wides','no balls','no_ball','noballs')\n        ) AS legal_balls,\n        SUM(is_wicket) AS wickets\n    FROM deliveries\n    WHERE over_no BETWEEN 1 AND "}

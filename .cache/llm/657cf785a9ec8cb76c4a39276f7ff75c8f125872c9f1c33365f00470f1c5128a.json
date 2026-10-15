@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS centuries\nFROM (\n    SELECT match_id, inning, batter, SUM(batter_runs) AS total_runs\n    FROM deliveries\n    GROUP BY match_id, inning, batter\n    HAVING SUM(batter_runs) >= 100\n) AS centuries_per_batter;\n```"}

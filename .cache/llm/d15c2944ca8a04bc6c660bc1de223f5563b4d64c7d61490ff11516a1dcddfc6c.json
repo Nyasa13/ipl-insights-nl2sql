@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    bowler,\n    SUM(is_bowler_wicket) AS wickets\nFROM ball_facts\nWHERE bowling_team = 'Mumbai Indians'\nGROUP BY bowler\nORDER BY wickets DESC\nLIMIT 1;\n```"}

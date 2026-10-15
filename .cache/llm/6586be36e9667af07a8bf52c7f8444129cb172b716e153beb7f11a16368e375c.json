@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT venue, COUNT(*) AS match_count\nFROM matches\nGROUP BY venue\nORDER BY match_count DESC\nLIMIT 1;\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT strike_rate\nFROM batting_by_season\nWHERE season = 2016\n  AND batter = 'V Kohli';\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS matches_played\nFROM matches\nWHERE season = 2020\n  AND (team1 = 'Mumbai Indians' OR team2 = 'Mumbai Indians');\n```"}

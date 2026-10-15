@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT * FROM pg_user;\n```"}

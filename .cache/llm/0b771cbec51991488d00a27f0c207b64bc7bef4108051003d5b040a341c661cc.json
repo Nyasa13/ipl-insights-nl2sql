@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(DISTINCT match_id) AS rcb_wins_after_losing_toss\nFROM matches\nWHERE winner = 'RCB'\n  AND toss_winner IS NOT NULL\n  AND toss_winner <> 'RCB';\n```"}

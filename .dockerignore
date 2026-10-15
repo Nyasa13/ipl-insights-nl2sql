@@ -1,0 +1,7 @@
+.git
+.env
+.cache
+__pycache__
+data/raw/*.csv
+data/synthetic
+eval/results

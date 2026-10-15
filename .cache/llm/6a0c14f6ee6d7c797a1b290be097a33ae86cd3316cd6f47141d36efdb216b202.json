@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS centuries_scored\nFROM player_match_batting\nWHERE runs >= 100;\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS total_rows FROM deliveries;\n```"}

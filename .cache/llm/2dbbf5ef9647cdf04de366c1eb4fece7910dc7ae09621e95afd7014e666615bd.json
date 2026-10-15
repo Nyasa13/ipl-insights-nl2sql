@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT batter\nFROM (\n    SELECT d.batter,\n           m.season,\n           SUM(d.batter_runs) AS season_runs\n    FROM deliveries d\n    JOIN matches m USING (match_id)\n    GROUP BY d.batter, m.season\n) AS sr\nWHERE sr.season_runs >= 500\nGROUP BY batter\nHAVING COUNT(DISTINCT sr.season) >= 3\nORDER BY batter;\n```"}

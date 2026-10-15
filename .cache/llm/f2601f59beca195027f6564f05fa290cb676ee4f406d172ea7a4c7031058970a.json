@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    bowler,\n    ROUND(\n        (SUM(total_runs)::numeric * 6) /\n        NULLIF(SUM(CASE WHEN extras_type NOT IN ('wide', 'no_ball') THEN 1 ELSE 0 END), 0),\n        2\n    ) AS economy_rate\nFROM deliveries\nGROUP BY bowler\nORDER BY economy_rate ASC\nLIMIT 1;\n```"}

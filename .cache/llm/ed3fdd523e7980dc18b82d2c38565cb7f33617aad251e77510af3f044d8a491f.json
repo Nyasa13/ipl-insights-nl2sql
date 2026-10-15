@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS super_over_matches\nFROM matches\nWHERE super_over = 'Y' \n  AND winner IS NOT NULL;\n```"}

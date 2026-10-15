@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT ROUND(AVG(pmb.runs), 2) AS avg_score\nFROM player_match_batting pmb\nJOIN matches m ON pmb.match_id = m.match_id\nWHERE pmb.batter = 'V Kohli'\n  AND m.winner IS NOT NULL\n  AND m.winner <> pmb.batting_team;\n```"}

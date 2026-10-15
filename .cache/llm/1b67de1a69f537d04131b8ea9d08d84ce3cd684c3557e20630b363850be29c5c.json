@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    batter,\n    ROUND(100.0 * SUM(runs) / SUM(balls_faced), 2) AS strike_rate\nFROM player_match_batting\nGROUP BY batter\nHAVING SUM(balls_faced) >= 500\nORDER BY strike_rate DESC\nLIMIT 1;\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(DISTINCT venue) AS distinct_venue_count\nFROM matches;\n```"}

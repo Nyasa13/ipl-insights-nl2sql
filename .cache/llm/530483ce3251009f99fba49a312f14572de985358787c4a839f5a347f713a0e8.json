@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    bowler,\n    ROUND(6.0 * SUM(bowler_runs) / NULLIF(SUM(is_legal_delivery), 0), 2) AS economy\nFROM ball_facts\nWHERE season >= 2020\n  AND phase = 'death'\nGROUP BY bowler\nHAVING SUM(is_legal_delivery) >= 200\nORDER BY economy ASC\nLIMIT 1;\n```"}

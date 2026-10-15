@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT SUM(runs) AS total_runs\nFROM player_match_batting\nWHERE batter = 'V Kohli';\n```"}

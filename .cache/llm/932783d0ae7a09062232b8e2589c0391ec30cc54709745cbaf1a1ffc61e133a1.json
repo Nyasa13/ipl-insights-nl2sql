@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(*) AS matches_won_by_chasing_team\nFROM matches\nWHERE season = 2021\n  AND winner = CASE\n        WHEN toss_decision = 'bat' THEN\n            CASE WHEN toss_winner = team1 THEN team2 ELSE team1 END\n        ELSE toss_winner\n    END;\n```"}

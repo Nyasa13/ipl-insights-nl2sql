@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT tablename\nFROM pg_tables\nWHERE schemaname = 'information_schema'\nORDER BY tablename;\n```"}

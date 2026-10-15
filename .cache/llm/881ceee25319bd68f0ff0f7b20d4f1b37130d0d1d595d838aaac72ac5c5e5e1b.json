@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    batter,\n    SUM(runs) AS total_runs\nFROM\n    player_match_batting\nWHERE\n    season = 2023\nGROUP BY\n    batter\nORDER BY\n    total_runs DESC\nLIMIT 5;\n```"}

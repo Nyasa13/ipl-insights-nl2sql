@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT \n    ROUND(100.0 * SUM(batter_runs)::numeric / NULLIF(SUM(CASE WHEN is_batter_ball = 1 THEN 1 ELSE 0 END), 0), 2) AS strike_rate\nFROM ball_facts\nWHERE season = 2016\n  AND batter = 'V Kohli';\n```"}

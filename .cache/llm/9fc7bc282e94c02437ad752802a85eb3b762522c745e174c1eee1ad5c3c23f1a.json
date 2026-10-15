@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    season,\n    ROUND(100.0 * SUM(CASE WHEN toss_winner = winner THEN 1 ELSE 0 END)::numeric\n          / COUNT(*)::numeric, 2) AS toss_win_pct\nFROM matches\nWHERE winner IS NOT NULL\nGROUP BY season\nORDER BY toss_win_pct DESC\nLIMIT 1;\n```"}

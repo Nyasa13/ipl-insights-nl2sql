@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COALESCE(SUM(wickets), 0) AS total_wickets\nFROM player_match_bowling\nWHERE season = 2020\n  AND bowler = 'JJ Bumrah';\n```"}

@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT\n    d.batter,\n    COUNT(*) AS sixes\nFROM\n    deliveries d\nWHERE\n    d.batter_runs = 6\nGROUP BY\n    d.batter\nORDER BY\n    sixes DESC\nLIMIT 1;\n```"}

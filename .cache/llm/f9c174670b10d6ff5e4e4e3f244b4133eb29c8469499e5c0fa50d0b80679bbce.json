@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT table_name\nFROM information_schema.tables\nWHERE table_schema = 'information_schema'\nORDER BY table_name;\n```"}

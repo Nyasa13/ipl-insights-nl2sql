@@ -1,0 +1,1 @@
+{"text": "```sql\nSELECT COUNT(DISTINCT m.match_id) AS matches_won_by_batting_first\nFROM matches m\nJOIN (\n    SELECT match_id, batting_team\n    FROM deliveries\n    WHERE inning = 1\n    GROUP BY match_id, batting_team\n) d ON m.match_id = d.match_id\nWHERE m.season = 2019\n  AND m.winner = d.batting_team;\n```"}

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "E01",
+    "difficulty": "easy",
+    "split": "dev",
+    "question": "How many matches were played in 2019?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE season = 2019",
+    "ordered": false
+  },
+  {
+    "id": "E02",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many matches did Chennai Super Kings win in 2018?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE season = 2018 AND winner = 'Chennai Super Kings'",
+    "ordered": false
+  },
+  {
+    "id": "E03",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "Which team won the most matches in 2016?",
+    "gold_sql": "SELECT winner FROM matches WHERE season = 2016 AND winner IS NOT NULL GROUP BY winner ORDER BY COUNT(*) DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "E04",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many different venues have hosted IPL matches?",
+    "gold_sql": "SELECT COUNT(DISTINCT venue) FROM matches",
+    "ordered": false
+  },
+  {
+    "id": "E05",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "Which player has won the most Player of the Match awards?",
+    "gold_sql": "SELECT player_of_match FROM matches WHERE player_of_match IS NOT NULL GROUP BY player_of_match ORDER BY COUNT(*) DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "E06",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many sixes were hit in the 2022 season?",
+    "gold_sql": "SELECT COUNT(*) FROM ball_facts WHERE season = 2022 AND batter_runs = 6",
+    "ordered": false
+  },
+  {
+    "id": "E07",
+    "difficulty": "easy",
+    "split": "dev",
+    "question": "In how many matches did the toss winner also win the match?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE toss_winner = winner",
+    "ordered": false
+  },
+  {
+    "id": "E08",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many seasons are covered in the database?",
+    "gold_sql": "SELECT COUNT(DISTINCT season) FROM matches",
+    "ordered": false
+  },
+  {
+    "id": "E09",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many matches were decided by a super over?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE super_over = 'Y'",
+    "ordered": false
+  },
+  {
+    "id": "E10",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many matches were played at Wankhede Stadium?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE venue ILIKE '%Wankhede%'",
+    "ordered": false
+  },
+  {
+    "id": "E11",
+    "difficulty": "easy",
+    "split": "test",
+    "question": "How many matches did Mumbai Indians play in 2020?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE season = 2020 AND (team1 = 'Mumbai Indians' OR team2 = 'Mumbai Indians')",
+    "ordered": false
+  },
+  {
+    "id": "M01",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "Top 5 run scorers in 2023",
+    "gold_sql": "SELECT batter, runs FROM batting_by_season WHERE season = 2023 ORDER BY runs DESC LIMIT 5",
+    "ordered": true
+  },
+  {
+    "id": "M02",
+    "difficulty": "medium",
+    "split": "dev",
+    "question": "Who took the most wickets in 2019?",
+    "gold_sql": "SELECT bowler FROM bowling_by_season WHERE season = 2019 ORDER BY wickets DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "M03",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "Which team has the highest win percentage across all seasons, among teams with at least 50 matches?",
+    "gold_sql": "WITH t AS (SELECT team1 AS team, winner FROM matches UNION ALL SELECT team2 AS team, winner FROM matches)\nSELECT team, ROUND(100.0 * SUM(CASE WHEN winner = team THEN 1 ELSE 0 END) / COUNT(*), 2) AS win_pct\nFROM t GROUP BY team HAVING COUNT(*) >= 50 ORDER BY win_pct DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "M04",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "How many runs has V Kohli scored in total?",
+    "gold_sql": "SELECT SUM(batter_runs) FROM ball_facts WHERE batter = 'V Kohli'",
+    "ordered": false
+  },
+  {
+    "id": "M05",
+    "difficulty": "medium",
+    "split": "dev",
+    "question": "Which batter has hit the most sixes in IPL history?",
+    "gold_sql": "SELECT batter FROM ball_facts WHERE batter_runs = 6 GROUP BY batter ORDER BY COUNT(*) DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "M06",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "What is the average first-innings score at M Chinnaswamy Stadium?",
+    "gold_sql": "SELECT ROUND(AVG(t), 2) FROM (SELECT match_id, SUM(total_runs) AS t FROM ball_facts WHERE inning = 1 AND venue ILIKE '%Chinnaswamy%' GROUP BY match_id) x",
+    "ordered": false
+  },
+  {
+    "id": "M07",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "Which bowler has taken the most wickets for Mumbai Indians?",
+    "gold_sql": "SELECT bowler FROM ball_facts WHERE bowling_team = 'Mumbai Indians' GROUP BY bowler ORDER BY SUM(is_bowler_wicket) DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "M08",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "How many centuries have been scored in IPL history?",
+    "gold_sql": "SELECT COUNT(*) FROM player_match_batting WHERE runs >= 100",
+    "ordered": false
+  },
+  {
+    "id": "M09",
+    "difficulty": "medium",
+    "split": "dev",
+    "question": "Which venue has hosted the most matches?",
+    "gold_sql": "SELECT venue FROM matches WHERE venue IS NOT NULL GROUP BY venue ORDER BY COUNT(*) DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "M10",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "What is the highest individual score in a single innings, and who scored it?",
+    "gold_sql": "SELECT batter, runs FROM player_match_batting ORDER BY runs DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "M11",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "Top 3 wicket-takers in the 2022 season",
+    "gold_sql": "SELECT bowler, wickets FROM bowling_by_season WHERE season = 2022 ORDER BY wickets DESC LIMIT 3",
+    "ordered": true
+  },
+  {
+    "id": "M12",
+    "difficulty": "medium",
+    "split": "test",
+    "question": "How many runs did Rajasthan Royals score in total in 2008?",
+    "gold_sql": "SELECT SUM(total_runs) FROM ball_facts WHERE batting_team = 'Rajasthan Royals' AND season = 2008",
+    "ordered": false
+  },
+  {
+    "id": "H01",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "Which bowler has the best economy rate in death overs since 2020, among bowlers with at least 200 balls bowled in death overs?",
+    "gold_sql": "SELECT bowler, ROUND(6.0 * SUM(bowler_runs) / SUM(is_legal_delivery), 2) AS economy\nFROM ball_facts WHERE phase = 'death' AND season >= 2020\nGROUP BY bowler HAVING SUM(is_legal_delivery) >= 200 ORDER BY economy ASC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "H02",
+    "difficulty": "hard",
+    "split": "dev",
+    "question": "For each season, which team or teams won the most matches? If teams tie, include all of them",
+    "gold_sql": "WITH w AS (SELECT season, winner, COUNT(*) AS wins FROM matches WHERE winner IS NOT NULL GROUP BY season, winner),\nr AS (SELECT season, winner, wins, RANK() OVER (PARTITION BY season ORDER BY wins DESC) AS rk FROM w)\nSELECT season, winner, wins FROM r WHERE rk = 1 ORDER BY season",
+    "ordered": true
+  },
+  {
+    "id": "H03",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "Which batters have scored at least 500 runs in three or more different seasons?",
+    "gold_sql": "SELECT batter FROM batting_by_season WHERE runs >= 500 GROUP BY batter HAVING COUNT(*) >= 3",
+    "ordered": false
+  },
+  {
+    "id": "H04",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "Which bowler has the best bowling strike rate (balls per wicket) in the powerplay among bowlers with at least 30 powerplay wickets?",
+    "gold_sql": "SELECT bowler, ROUND(1.0 * SUM(is_legal_delivery) / SUM(is_bowler_wicket), 2) AS balls_per_wicket\nFROM ball_facts WHERE phase = 'powerplay' GROUP BY bowler HAVING SUM(is_bowler_wicket) >= 30\nORDER BY balls_per_wicket ASC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "H05",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "How many matches did RCB win after losing the toss?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE winner = 'Royal Challengers Bengaluru' AND toss_winner <> 'Royal Challengers Bengaluru'",
+    "ordered": false
+  },
+  {
+    "id": "H06",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "Who has the highest strike rate in the powerplay among batters who faced at least 500 powerplay balls?",
+    "gold_sql": "SELECT batter, ROUND(100.0 * SUM(batter_runs) / SUM(is_batter_ball), 2) AS strike_rate\nFROM ball_facts WHERE phase = 'powerplay' GROUP BY batter HAVING SUM(is_batter_ball) >= 500\nORDER BY strike_rate DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "H07",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "What is V Kohli's average score in matches that his team lost?",
+    "gold_sql": "SELECT ROUND(AVG(p.runs), 2) AS avg_runs FROM player_match_batting p JOIN matches m ON m.match_id = p.match_id\nWHERE p.batter = 'V Kohli' AND m.winner IS NOT NULL AND m.winner <> p.batting_team",
+    "ordered": false
+  },
+  {
+    "id": "H08",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "In which season did the toss winner win the match most often, as a percentage of matches?",
+    "gold_sql": "SELECT season, ROUND(100.0 * SUM(CASE WHEN toss_winner = winner THEN 1 ELSE 0 END) / COUNT(*), 2) AS pct\nFROM matches WHERE winner IS NOT NULL GROUP BY season ORDER BY pct DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "H09",
+    "difficulty": "hard",
+    "split": "dev",
+    "question": "Among batters with at least 1000 career runs, who has the highest share of their runs from boundaries (fours and sixes)?",
+    "gold_sql": "SELECT batter, ROUND(100.0 * SUM(CASE WHEN batter_runs IN (4, 6) THEN batter_runs ELSE 0 END) / SUM(batter_runs), 2) AS boundary_pct\nFROM ball_facts GROUP BY batter HAVING SUM(batter_runs) >= 1000 ORDER BY boundary_pct DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "H10",
+    "difficulty": "hard",
+    "split": "test",
+    "question": "Which bowler has dismissed V Kohli the most times?",
+    "gold_sql": "SELECT bowler FROM ball_facts WHERE player_dismissed = 'V Kohli' AND is_bowler_wicket = 1 GROUP BY bowler ORDER BY COUNT(*) DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "T01",
+    "difficulty": "tricky",
+    "split": "test",
+    "question": "How many matches were won by the team chasing in 2021?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE season = 2021 AND result = 'wickets'",
+    "ordered": false
+  },
+  {
+    "id": "T02",
+    "difficulty": "tricky",
+    "split": "test",
+    "question": "Who has the best strike rate in IPL history?",
+    "gold_sql": "SELECT batter, ROUND(100.0 * SUM(batter_runs) / SUM(is_batter_ball), 2) AS strike_rate\nFROM ball_facts GROUP BY batter HAVING SUM(is_batter_ball) >= 500 ORDER BY strike_rate DESC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "T03",
+    "difficulty": "tricky",
+    "split": "test",
+    "question": "Who has the best economy rate in IPL history?",
+    "gold_sql": "SELECT bowler, ROUND(6.0 * SUM(bowler_runs) / SUM(is_legal_delivery), 2) AS economy\nFROM ball_facts GROUP BY bowler HAVING SUM(is_legal_delivery) >= 300 ORDER BY economy ASC LIMIT 1",
+    "ordered": false
+  },
+  {
+    "id": "T04",
+    "difficulty": "tricky",
+    "split": "test",
+    "question": "How many wickets did JJ Bumrah take in 2020?",
+    "gold_sql": "SELECT SUM(is_bowler_wicket) FROM ball_facts WHERE bowler = 'JJ Bumrah' AND season = 2020",
+    "ordered": false
+  },
+  {
+    "id": "T05",
+    "difficulty": "tricky",
+    "split": "dev",
+    "question": "What was V Kohli's strike rate in 2016?",
+    "gold_sql": "SELECT strike_rate FROM batting_by_season WHERE batter = 'V Kohli' AND season = 2016",
+    "ordered": false
+  },
+  {
+    "id": "T06",
+    "difficulty": "tricky",
+    "split": "test",
+    "question": "How many matches were won by the team batting first in 2019?",
+    "gold_sql": "SELECT COUNT(*) FROM matches WHERE season = 2019 AND result = 'runs'",
+    "ordered": false
+  },
+  {
+    "id": "T07",
+    "difficulty": "tricky",
+    "split": "test",
+    "question": "Which batter has the best strike rate in the 2023 season?",
+    "gold_sql": "SELECT batter, strike_rate FROM batting_by_season WHERE season = 2023 AND balls_faced >= 100 ORDER BY strike_rate DESC LIMIT 1",
+    "ordered": false
+  }
+]

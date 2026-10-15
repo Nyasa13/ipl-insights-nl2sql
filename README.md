@@ -1,3 +1,4 @@
+
 # 🏏 IPL Insights: natural-language analytics with guardrails
 
 Ask questions about IPL cricket in plain English. The system writes PostgreSQL, **validates it**, runs it
@@ -156,3 +157,6 @@ Free-tier terms change, so check each provider's current limits.
 > Live: [link] • Code: [github link]
 > - Built a natural-language analytics assistant over X IPL matches (Y deliveries); schema-aware prompting, few-shot examples, entity linking and SQL self-correction raised execution accuracy from X% to Y% on a held-out N-question gold set.
 > - Enforced safety with a sqlglot validator, read-only DB role and timeouts (A/A adversarial inputs blocked); a numeric grounding check on generated summaries cut unsupported claims from X to Y; added Z-score anomaly detection for outlier performances.
+=======
+# ipl-insights-nl2sql
+
